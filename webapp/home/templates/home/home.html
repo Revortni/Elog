@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+	<div class="container">
+		<h1>Patient List</h1>
+	</div>
+{% endblock%}
+
+{% block body %}
+
+	<div class='table-responsive' >
+	<table class = 'table'>
+	<tr>
+		<th>FirstName</th>
+		<th>LastName</th>
+		<th>Add report</th>
+	</tr>
+	{% for person in users %}	
+	<tr>	
+			<td>{{ person.first_name }}</td>
+			<td>{{ person.last_name }}</td>
+			<td><a href="{% url 'accounts:view_profile_with_pk' pk=person.pk %}"><button class="btn btn-primary">Add session</button></a></td>
+	</tr>
+	{% endfor %}
+	</table>
+	</div>
+{% endblock%}

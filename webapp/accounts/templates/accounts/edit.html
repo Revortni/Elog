@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+	{% block head %}
+		<div class="container">
+			<h1> Edit Profile <a href="{% url 'accounts:edit_profile' %}"> </h1>
+		</div>
+	{% endblock %}
+
+	{% block body %}
+
+		<div class="container">
+			<form method="post">
+				{% csrf_token %}
+				{{form.as_p}}
+				<button type = "submit">Submit</button>
+			</form>
+		</div>
+
+	{% endblock %}
+

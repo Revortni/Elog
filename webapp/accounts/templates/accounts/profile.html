@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+
+	{% block head %}
+		<div class="container">
+			<h1> Profile </h1>
+		</div>
+	{% endblock %}
+	{% block nav %}
+		<li><a href="{% url 'accounts:patientlist' %}"><span class="glyphicon glyphicon-user"></span>Patientlist</a>
+	{% endblock%}
+
+	{% block body %}
+
+		<div class="col-md-8">
+			<p>
+				<p>Username:{{user}}</p>
+				<p>FirstName:{{ user.first_name }}</p>
+				<p>LastName:{{ user.last_name }}</p>
+				<p>Email:{{ user.email }}</p>
+				<p>Gender:{{ user.gender.value }}</p>
+			</p>
+		</div>
+	{% endblock %}
+
+ 
+
+	{% block log %}
+	<div class="container">
+		<h1>Add Log</h1>
+		<form method="post">
+			{% csrf_token %}
+			{{form.as_p}}
+			<br>
+			<button type = "submit">Submit</button>
+		</form>
+	</div>
+	<br>
+	<div class = "container">
+	<h1>History</h1>
+	{% if posts %}
+	        {% for post in posts %}
+	        <hr class='line'>
+	        <div class = "row">
+	        	<span class="col-sm-6" style="font-size:30px;font-weight:bold;"}>Session {{post.id}} </span>
+	        	<span class="col-sm-6" align='right'>{{ post.created }}</span>
+	        </div>
+	    <div class='container'>
+	        <h3>Log</h3>
+            <p>{{ post.log }}</p>
+            <hr>
+            <h3>Medicines</h3>
+            <p>{{ post.medicines }}</p>
+        </div>
+        {% endfor %}
+        	
+    {% else %}
+    	<h3> No recent History</h3>
+    	</div>
+    {% endif %}
+	{% endblock %}
